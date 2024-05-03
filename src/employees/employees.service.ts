@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 // import { CreateEmployeeDto } from './dto/create-employee.dto';
 // import { UpdateEmployeeDto } from './dto/update-employee.dto';
-import { Prisma } from '@prisma/client';
+import { Prisma, Role } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class EmployeesService {
     });
   }
 
-  async findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
+  async findAll(role?: Role) {
     if (role) return this.databaseService.employee.findMany({
       where: {
         role,
@@ -47,5 +47,5 @@ export class EmployeesService {
       }
     })
   }
-  
+
 }
